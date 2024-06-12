@@ -1,24 +1,55 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column      | Type   | Options                   |
+| ----------- | ------ | ------------------------- |  
+| nickname    | string | null: false               |
+| email       | string | null: false, unique: true |
+| password    | string | null: false               |
+| familyname  | string | null: false               |
+| firstname   | string | null: false               |
+| birthyear   | string | null: false               |
+| birthmonth  | string | null: false               |
+| birthday    | string | null: false               |
 
-* Ruby version
 
-* System dependencies
+### Association
 
-* Configuration
+has_many: items
+has_many: comments
 
-* Database creation
+## itemsテーブル
 
-* Database initialization
+| Column      | Type   | Options                        |
+| ----------- | ------ | ------------------------------ |  
+| name        | string | null: false                    |
+| explanation | text   | null: false, unique: true      |
+| category    | string | null: false                    |
+| state       | string | null: false                    |
+| payer       | string | null: false                    |
+| fromwhere   | string | null: false                    |
+| period      | string | null: false                    |
+| price       | string | null: false                    |
+| user        | string | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+belongs_to: user
+has_many: items
 
-* Deployment instructions
 
-* ...
+## commentsテーブル
+
+| Column      | Type   | Options                   |
+| ----------- | ------ | ------------------------- |  
+| content     | text   | null: false               |
+| item        | string | null: false, unique: true |
+| user        | string | null: false, unique: true |
+
+### Association
+
+belongs_to: user
+belongs_to: item
+
+
