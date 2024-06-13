@@ -2,54 +2,64 @@
 
 ## usersテーブル
 
-| Column      | Type   | Options                   |
-| ----------- | ------ | ------------------------- |  
-| nickname    | string | null: false               |
-| email       | string | null: false, unique: true |
-| password    | string | null: false               |
-| familyname  | string | null: false               |
-| firstname   | string | null: false               |
-| birthyear   | string | null: false               |
-| birthmonth  | string | null: false               |
-| birthday    | string | null: false               |
-
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |  
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| familyname         | string | null: false               |
+| firstname          | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 
 has_many: items
-has_many: comments
+has_many: records
 
 ## itemsテーブル
 
-| Column      | Type   | Options                        |
-| ----------- | ------ | ------------------------------ |  
-| name        | string | null: false                    |
-| explanation | text   | null: false, unique: true      |
-| category    | string | null: false                    |
-| state       | string | null: false                    |
-| payer       | string | null: false                    |
-| fromwhere   | string | null: false                    |
-| period      | string | null: false                    |
-| price       | string | null: false                    |
-| user        | string | null: false, foreign_key: true |
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| name        | string     | null: false                    |
+| explanation | text       | null: false                    |
+| category    | integer    | null: false                    |
+| state       | integer    | null: false                    |
+| payer       | integer    | null: false                    |
+| fromwhere   | integer    | null: false                    |
+| period      | integer    | null: false                    |
+| price       | integer    | null: false                    |
+| user        | references | null: false, foreign_key: true |
 
 ### Association
 
 belongs_to: user
-has_many: items
+has_many: buyers
+has_many: records
 
+## buyersテーブル
 
-## commentsテーブル
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| post_code   | integer    | null: false                    |
+| prefecture  | integer    | null: false                    |
+| city        | string     | null: false                    |
+| address     | integer    | null: false                    |
+| building    | string     |                                |
+| phone_number| integer    | null: false                    |
+| item        | references | null: false, foreign_key: true |
 
-| Column      | Type   | Options                   |
-| ----------- | ------ | ------------------------- |  
-| content     | text   | null: false               |
-| item        | string | null: false, unique: true |
-| user        | string | null: false, unique: true |
+### Association
+
+belongs_to: item
+
+## recordsテーブル
+
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |  
+| user        | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
 
 ### Association
 
 belongs_to: user
 belongs_to: item
-
-
