@@ -51,7 +51,6 @@ has_one: record
 
 ### Association
 
-belongs_to: item
 belongs_to: record
 
 ## recordsテーブル
