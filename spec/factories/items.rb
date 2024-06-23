@@ -9,5 +9,9 @@ FactoryBot.define do
     period_id         { 2 }
     price             { 3000 }
     association :user
+
+    after(:build) do |item|
+      item.image.attach(io: File.open('spec/fixtures/test_image.png'), filename: 'test_image.png')
+    end  
   end
 end
