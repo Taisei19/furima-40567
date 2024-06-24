@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :period
 
-
+  extend ActiveHash::Associations::ActiveRecordExtensions
   validates :image, :name, :explanation, :price, presence: true
 
   validates :category_id,   numericality: { other_than: 1, message: "can't be blank" }
