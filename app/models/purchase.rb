@@ -1,8 +1,9 @@
 class Purchase
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :city, :address, :building, :phone_number
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :city, :address, :building, :phone_number, :token
 
-  validates :user_id, :item_id, :post_code, :prefecture_id, :city, :address, :phone_number, presence: true
+  validates :post_code, :prefecture_id, :city, :address, :phone_number, presence: true
+  
 
   def save
     purchase = Record.new(user_id: user_id, item_id: item_id)
