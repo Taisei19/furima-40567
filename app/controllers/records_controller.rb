@@ -1,17 +1,16 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create,]
   before_action :redirect_unless_item_available, only: [:index, :create]
   
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @purchase = Purchase.new
   end
 
   def create
     token = params[:token] 
-    @item = Item.find(params[:item_id])
     @purchase = Purchase.new(purchase_params)
     if @purchase.valid?
       pay_item(token) 
@@ -26,7 +25,7 @@ class RecordsController < ApplicationController
  private
 
   def purchase_params
-    params.require(:purchase).permit(:post_code, :prefecture_id, :city, :address, :building, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id)
+    params.require(:purchase).permit(:post_code, :prefecture_id, :city, :address, :building, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
   end
 
   def pay_item(token) 

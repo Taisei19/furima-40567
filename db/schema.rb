@@ -40,12 +40,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_03_072539) do
   end
 
   create_table "buyers", charset: "utf8", force: :cascade do |t|
-    t.string "post_code"
-    t.integer "prefecture_id"
-    t.string "city"
-    t.string "address"
+    t.string "post_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "address", null: false
     t.string "building"
-    t.string "phone_number"
+    t.string "phone_number", null: false
     t.bigint "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
