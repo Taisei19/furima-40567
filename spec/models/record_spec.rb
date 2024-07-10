@@ -14,8 +14,8 @@ RSpec.describe Record, type: :model do
 
   it "カード情報が入力できていないと購入できない" do
     @purchase = FactoryBot.build(:purchase, token: nil, user_id: @user.id, item_id: @item.id)
-    @purchase.valid?
-    expect(@purchase.errors.full_messages).to include("Token can't be blank")
+    expect(@purchase).to be_invalid 
+    expect(@purchase.errors.full_messages).to include("Token can't be blank")  
   end
 
   it "郵便番号なしでは購入できない" do
@@ -54,14 +54,14 @@ RSpec.describe Record, type: :model do
     expect(@buyer.errors.full_messages).to include("Phone number can't be blank")
   end
 
-  it "電話番号が６文字以下では購入できない" do
-    @buyer.phone_number = "123456"
+  it "電話番号が9文字以下では購入できない" do
+    @buyer.phone_number = "123456789"
     @buyer.valid?
     expect(@buyer.errors.full_messages).to include("Phone number is too short")
   end
 
   it "電話番号に数字以外が入っていると購入できない。" do
-    @buyer.phone_number = "123456あ"
+    @buyer.phone_number = "123456789あ"
     @buyer.valid?
     expect(@buyer.errors.full_messages).to include("Phone number is invalid. Input only number")
   end

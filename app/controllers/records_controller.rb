@@ -1,4 +1,7 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :redirect_unless_item_available, only: [:index, :create]
+  
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -34,6 +37,13 @@ class RecordsController < ApplicationController
       card: token,    
       currency: 'jpy'                
     )
+  end
+
+  def redirect_unless_item_available
+    @item = Item.find(params[:item_id])
+    if @item.record.present? || @item.user == current_user
+      redirect_to root_path
+    end
   end
 
 end
