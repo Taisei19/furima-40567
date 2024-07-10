@@ -8,6 +8,8 @@ class Purchase
     validates :address
     validates :phone_number, length: { minimum: 10, maximum: 11, too_short: "is too short", too_long: "is too long" }, format: { with: /\A\d+\z/ , message: "is invalid. Input only number" }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }

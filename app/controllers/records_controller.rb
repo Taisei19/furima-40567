@@ -1,6 +1,5 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :set_item, only: [:index, :create,]
   before_action :redirect_unless_item_available, only: [:index, :create]
   
 
@@ -46,8 +45,3 @@ class RecordsController < ApplicationController
   end
 
 end
-
-
-  
-
-
