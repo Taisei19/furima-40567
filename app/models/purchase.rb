@@ -2,7 +2,7 @@ class Purchase
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :city, :address, :building, :phone_number, :token
 
-  validates :post_code, :prefecture_id, :city, :address, :phone_number, presence: true
+  validates :post_code, :prefecture_id, :city, :address, :phone_number, :token, presence: true
   
 
   def save
